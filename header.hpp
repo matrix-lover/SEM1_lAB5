@@ -33,6 +33,7 @@ void SortByName(vector<Student>&students)
     
 }
 
+
 void SortByRating(vector<Student>&students)
 {
     float arif_mean_i = 0;
@@ -70,6 +71,7 @@ void SortByRating(vector<Student>&students)
     
 }
 
+
 size_t CountTwoness(const vector<Student>&students)
 {
     size_t count = 0;
@@ -91,6 +93,7 @@ size_t CountTwoness(const vector<Student>&students)
     return count; // количество студентов с неудовлетворительными оценками
 }
 
+
 size_t CountExellent(const vector<Student>&students)
 {
     size_t count = 0;
@@ -111,6 +114,7 @@ size_t CountExellent(const vector<Student>&students)
     
     return number - count; // все - неотличники
 }
+
 
 vector<Student> VectorMathExellent(const vector<Student>&students)
 {
@@ -144,3 +148,31 @@ vector<string> GroupsId(const vector<Student>&students)
     
     return Groups;
 }
+
+
+vector<string> GroupsId(const vector<Student>&students)
+{
+    vector<string> Groups;
+    unsigned long number;
+    number = students.size(); // количество студентов
+    int count = 0;
+    
+    for(int i = 0; i < number; ++i) // перебираем студентов
+    {
+        for(int j = 0; j < Groups.size(); ++j) // перебираем названия групп, уже записанных в Groups
+        {
+            if(students[i].GroupId == Groups[j]) // если уже есть группа с таким же названием в массиве Groups
+            {
+                count += 1;
+            }
+        }
+        if(count != 1) // если нет таких
+        {
+            Groups.push_back(students[i].GroupId);
+        }
+        count = 0;
+    }
+    
+    return Groups;
+}
+
