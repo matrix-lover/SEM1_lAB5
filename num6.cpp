@@ -7,11 +7,34 @@ struct Student{
     string GroupId;
     vector<unsigned> Ratings;
     vector<string> Subject;
-    Student* next;
 };
-#include "header.hpp"
 
-vector<string> GroupsId(const vector<Student>&students);
+vector<string> GroupsId(const vector<Student>&students)
+{
+    vector<string> groups_name;
+    unsigned long number;
+    number = students.size(); // количество студентов
+    int count = 0;
+    
+    for(int i = 0; i < number; ++i) // перебираем студентов
+    {
+        for(int j = 0; j < groups_name.size(); ++j) // перебираем названия групп, уже записанных в Groups
+        {
+            if(students[i].GroupId == groups_name[j]) // если уже есть группа с таким же названием в массиве Groups
+            {
+                count += 1;
+                break;
+            }
+        }
+        if(count != 1) // если нет таких
+        {
+            groups_name.push_back(students[i].GroupId);
+        }
+        count = 0;
+    }
+    
+    return groups_name;
+}
 
 int main()
 {
@@ -37,12 +60,11 @@ int main()
     
     vector<Student> students = {Freder, Katty, Andrey};
     
-
-    vector<string> Groups = GroupsId(students);
+    vector<string> groups_name = GroupsId(students);
     
-    for (int i = 0; i < Groups.size(); ++i)
+    for (int i = 0; i < groups_name.size(); ++i)
     {
-        cout << Groups[i] << endl;
+        cout << groups_name[i] << endl;
     }
     return 0;
 }
