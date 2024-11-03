@@ -7,11 +7,30 @@ struct Student{
     string GroupId;
     vector<unsigned> Ratings;
     vector<string> Subject;
-    Student* next;
-};
-#include "header.hpp"
 
-size_t CountTwoness(const vector<Student>&students);
+};
+
+
+size_t CountTwoness(const vector<Student>&students)
+{
+    size_t count = 0;
+    unsigned long number;
+    number = students.size(); // количество студентов
+    
+    for(int i = 0; i < number; ++i) // перебираем студентов
+    {
+        for(int rat_num = 0; rat_num < students[i].Ratings.size(); ++rat_num) // перебираем их оценки
+        {
+            if(students[i].Ratings[rat_num] < 3)
+            {
+                count += 1;
+                break;
+            }
+        }
+    }
+    
+    return count; // количество студентов с неудовлетворительными оценками
+}
 
 int main()
 {
@@ -33,3 +52,4 @@ int main()
     cout << count << endl;
     return 0;
 }
+
